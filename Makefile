@@ -21,7 +21,7 @@ run:
 		-v $(HOME)/.ssh/$(SSH_KEY):/root/.ssh/$(SSH_KEY) \
 		--env-file .env \
 		$(IMAGE_NAME) \
-		ansible-playbook ansible/development.yml -i ansible/development
+		ansible-playbook ansible/development.yml -i ansible/development -vv
 
 bash:
 	docker run --rm -it \
