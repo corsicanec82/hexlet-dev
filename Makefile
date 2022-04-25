@@ -5,12 +5,17 @@ endif
 
 IMAGE_NAME := corsicanec82/ansible-runner
 
+prepare:
+	cp -n .env.example .env
+
 build:
 	docker build \
 		-t $(IMAGE_NAME) \
 		ansible
 
-setup:
+setup: prepare build
+
+run:
 	docker run --rm \
 		-v $(CURDIR):/app \
 		-v $(HOME)/.ssh/$(SSH_KEY):/root/.ssh/$(SSH_KEY) \
