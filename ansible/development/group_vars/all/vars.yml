@@ -1,0 +1,2 @@
+remote_host: "{{ lookup('env', 'REMOTE_HOST') }}"
+private_key_file_path: "/root/.ssh/{{ lookup('env', 'SSH_KEY') }}"

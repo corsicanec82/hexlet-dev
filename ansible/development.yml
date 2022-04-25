@@ -1,0 +1,10 @@
+- hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: docker info
+      shell: docker info
+      register: command_output
+
+    - debug:
+        var: command_output.stdout_lines
