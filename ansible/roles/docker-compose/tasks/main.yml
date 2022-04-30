@@ -11,5 +11,9 @@
         src: "{{ docker_plugins_path }}/docker-compose"
         dest: /usr/local/bin/docker-compose
         state: link
+    # NOTE: https://docs.docker.com/compose/completion/#bash - Error 404
+    # - get_url:
+    #     url: "https://raw.githubusercontent.com/docker/compose/{{ version }}/contrib/completion/bash/docker-compose"
+    #     dest: /etc/bash_completion.d/docker-compose
   vars:
     docker_plugins_path: "{{ ansible_env.HOME }}/.docker/cli-plugins"
