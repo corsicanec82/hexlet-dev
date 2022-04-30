@@ -9,6 +9,8 @@
 
   roles:
     - role: docker-compose
+      vars:
+        version: v2.4.1
 
     # - name: debug
     #   shell: docker compose version
