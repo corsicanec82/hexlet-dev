@@ -8,9 +8,9 @@
     dest: "{{ asdf_dir }}"
     version: "{{ version }}"
 
-- lineinfile:
+- blockinfile:
     path: ~/.bashrc.d/asdf.bashrc
-    line: |
+    block: |
       . $HOME/.asdf/asdf.sh
       . $HOME/.asdf/completions/asdf.bash
     create: yes
