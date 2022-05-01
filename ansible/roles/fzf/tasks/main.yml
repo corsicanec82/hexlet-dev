@@ -1,0 +1,10 @@
+- apt:
+    pkg:
+      - fzf
+    update_cache: yes
+
+- blockinfile:
+    path: ~/.bashrc.d/fzf.bashrc
+    block: |
+      . /usr/share/doc/fzf/examples/key-bindings.bash
+    create: yes
