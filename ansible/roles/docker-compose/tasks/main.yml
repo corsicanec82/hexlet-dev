@@ -1,14 +1,17 @@
 - file:
     path: "{{ docker_config_dir }}/cli-plugins"
     state: directory
+
 - get_url:
     url: "https://github.com/docker/compose/releases/download/{{ version }}/docker-compose-linux-x86_64"
     dest: "{{ docker_config_dir }}/cli-plugins/docker-compose"
     mode: "+x"
+
 - file:
     src: "{{ docker_config_dir }}/cli-plugins/docker-compose"
     dest: /usr/local/bin/docker-compose
     state: link
+
 # NOTE: https://docs.docker.com/compose/completion/#bash - Error 404
 # - get_url:
 #     url: "https://raw.githubusercontent.com/docker/compose/{{ version }}/contrib/completion/bash/docker-compose"

@@ -14,6 +14,7 @@
     - role: bashrc
     - role: ps1
     - role: fzf
+    - role: tmux
 
     - role: docker-compose
       version: v2.4.1

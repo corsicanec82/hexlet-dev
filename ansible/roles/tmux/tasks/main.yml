@@ -1,0 +1,25 @@
+- apt:
+    pkg:
+      - tmux
+    update_cache: yes
+
+- git:
+    repo: https://github.com/gpakosz/.tmux.git
+    dest: ~/.tmux
+
+- file:
+    src: ~/.tmux/.tmux.conf
+    dest: ~/.tmux.conf
+    state: link
+    force: yes
+
+- copy:
+    src: ~/.tmux/.tmux.conf.local
+    dest: ~/
+    remote_src: yes
+
+- blockinfile:
+    path: ~/.bashrc.d/tmux.bashrc
+    block: |
+      alias dev='tmux attach -t dev || tmux new -s dev'
+    create: yes
