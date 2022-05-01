@@ -5,16 +5,25 @@
   pre_tasks:
     - name: Update apt packages
       apt:
+        pkg:
+          - curl
+          - make
         update_cache: yes
 
   roles:
+    - role: bashrc
+
     - role: docker-compose
-      vars:
-        version: v2.4.1
+      version: v2.4.1
 
-    # - name: debug
-    #   shell: docker compose version
-    #   register: command_output
-
-    # - debug:
-    #     var: command_output.stdout_lines
+    - role: asdf
+      version: v0.10.0
+      plugins:
+        - name: nodejs
+          versions:
+            - 16.15.0
+          global: 16.15.0
+        - name: ruby
+          versions:
+            - 3.1.2
+          global: 3.1.2

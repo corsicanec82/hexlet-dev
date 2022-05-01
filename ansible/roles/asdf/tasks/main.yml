@@ -1,0 +1,25 @@
+- apt:
+    pkg:
+      - git
+    update_cache: yes
+
+- git:
+    repo: https://github.com/asdf-vm/asdf.git
+    dest: "{{ asdf_dir }}"
+    version: "{{ version }}"
+
+- lineinfile:
+    path: ~/.bashrc.d/asdf.bashrc
+    line: |
+      . $HOME/.asdf/asdf.sh
+      . $HOME/.asdf/completions/asdf.bash
+    create: yes
+
+- block:
+    - include_tasks: "plugin.yml"
+      vars:
+        data: "{{ plugin_data }}"
+      with_items: "{{ plugins }}"
+      loop_control:
+        loop_var: plugin_data
+      when: plugins is defined

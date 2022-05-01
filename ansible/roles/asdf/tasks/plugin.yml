@@ -1,0 +1,17 @@
+- apt:
+    pkg: "{{ requirements[data.name].dependencies }}"
+    update_cache: yes
+  when: requirements[data.name].dependencies is defined
+
+- shell: "bash -ic 'asdf plugin add {{ data.name }} {{ data.repository | default(requirements[data.name].repository) }}'"
+  args:
+    creates: "{{ asdf_dir }}/plugins/{{ data.name }}"
+
+- shell: "bash -ic 'asdf install {{ data.name }} {{ item_version }}'"
+  args:
+    creates: "{{ asdf_dir }}/installs/{{ data.name }}/{{ item_version }}"
+  with_items: "{{ data.versions }}"
+  loop_control:
+    loop_var: item_version
+
+- shell: "bash -ic 'asdf global {{ data.name }} {{ data.global }}'"
