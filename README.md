@@ -6,7 +6,7 @@
 
 ## Setup
 
-Perform the preparation step and fill the generated *.env* file
+Perform the preparation step. Fill the generated *.env* file and *ansible/development/group_vars/all/vault_vars.yml*. You need to add variable *private_key_github_file* and encrypt file with ansible vault.
 
 ```bash
 make setup

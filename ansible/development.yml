@@ -15,6 +15,7 @@
     - role: ps1
     - role: fzf
     - role: tmux
+    - role: secrets
 
     - role: docker-compose
       version: v2.4.1
