@@ -17,7 +17,7 @@ build:
 
 setup: prepare build
 
-run:
+setup-dev:
 	docker run --rm \
 		-v $(CURDIR):/app \
 		-v $(HOME)/.ssh/$(SSH_KEY):/root/.ssh/$(SSH_KEY) \

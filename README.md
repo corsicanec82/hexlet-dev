@@ -17,5 +17,13 @@ make setup
 Prepare a remote host for work by executing a single command
 
 ```bash
-make run
+make setup-dev
+```
+
+## Bash
+
+If you need debugging, use the command:
+
+```bash
+make bash
 ```
