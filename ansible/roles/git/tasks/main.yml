@@ -1,0 +1,26 @@
+- apt:
+    pkg:
+      - git
+    update_cache: yes
+
+- blockinfile:
+    path: ~/.gitconfig
+    block: |
+      [user]
+        name = Stanislav Dzisiak
+        email = stanislav.dzisiak@outlook.com
+      [core]
+        editor = nano
+      [push]
+        default = simple
+      [pretty]
+        my = format:%C(yellow)%h%C(reset) | %C(dim green)%cd%C(reset) | %C(green)%cr%C(reset) | %C(cyan)%s%C(red)%d%C(red)%C(reset) %C(blue)[%an]%C(reset)
+      [format]
+        pretty = my
+      [log]
+        date = short
+      [pull]
+        rebase = false
+      [init]
+        defaultBranch = main
+    create: yes

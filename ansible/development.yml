@@ -8,11 +8,13 @@
         pkg:
           - curl
           - make
+          - mc
         update_cache: yes
 
   roles:
     - role: bashrc
     - role: ps1
+    - role: git
     - role: fzf
     - role: tmux
     - role: secrets
