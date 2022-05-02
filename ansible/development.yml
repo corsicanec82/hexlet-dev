@@ -7,6 +7,7 @@
       apt:
         pkg:
           - curl
+          - gnupg
           - make
           - mc
         update_cache: yes
@@ -15,11 +16,17 @@
     - role: secrets
     - role: bashrc
     - role: ps1
+
     - role: git
+      config:
+        name: "{{ git_config_name }}"
+        email: "{{ git_config_email }}"
+
     - role: fzf
     - role: tmux
     - role: terraform
     - role: kubectl
+    - role: helm
 
     - role: docker-compose
       version: v2.4.1

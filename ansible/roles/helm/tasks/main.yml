@@ -1,0 +1,20 @@
+- apt_key:
+    url: https://baltocdn.com/helm/signing.asc
+    keyring: /etc/apt/trusted.gpg.d/helm-stable-debian.gpg
+
+- apt_repository:
+    repo: deb https://baltocdn.com/helm/stable/debian/ all main
+
+- apt:
+    pkg:
+      - apt-transport-https
+      - helm
+    update_cache: yes
+
+- shell: bash -ic 'helm completion bash'
+  register: helm_completion_bash
+
+- blockinfile:
+    path: /etc/bash_completion.d/helm
+    block: "{{ helm_completion_bash.stdout }}"
+    create: yes

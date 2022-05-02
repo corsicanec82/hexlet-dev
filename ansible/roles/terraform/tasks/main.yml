@@ -1,10 +1,3 @@
-- apt:
-    pkg:
-      - gnupg
-      - software-properties-common
-      - curl
-    update_cache: yes
-
 - apt_key:
     url: https://apt.releases.hashicorp.com/gpg
     keyring: /etc/apt/trusted.gpg.d/apt-releases-hashicorp-com.gpg
@@ -17,5 +10,6 @@
 
 - apt:
     pkg:
+      - software-properties-common
       - terraform
     update_cache: yes

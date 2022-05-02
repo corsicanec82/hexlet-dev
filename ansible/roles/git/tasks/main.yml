@@ -7,8 +7,8 @@
     path: ~/.gitconfig
     block: |
       [user]
-        name = Stanislav Dzisiak
-        email = stanislav.dzisiak@outlook.com
+        name = {{ config.name }}
+        email = {{ config.email }}
       [core]
         editor = nano
       [push]
