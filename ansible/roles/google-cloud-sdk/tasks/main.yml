@@ -1,0 +1,13 @@
+- get_url:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    dest: /usr/share/keyrings/cloud.google.gpg
+
+- apt_repository:
+    repo: deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main
+
+- apt:
+    pkg:
+      - apt-transport-https
+      - ca-certificates
+      - google-cloud-cli
+    update_cache: yes

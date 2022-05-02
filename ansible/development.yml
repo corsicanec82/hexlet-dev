@@ -27,6 +27,7 @@
     - role: terraform
     - role: kubectl
     - role: helm
+    - role: google-cloud-sdk
 
     - role: docker-compose
       version: v2.4.1
