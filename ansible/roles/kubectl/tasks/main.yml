@@ -1,0 +1,26 @@
+- apt:
+    pkg:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+    update_cache: yes
+
+- get_url:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    dest: /usr/share/keyrings/kubernetes-archive-keyring.gpg
+
+- apt_repository:
+    repo: deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main
+
+- apt:
+    pkg:
+      - kubectl
+    update_cache: yes
+
+- shell: bash -ic 'kubectl completion bash'
+  register: kubectl_completion_bash
+
+- blockinfile:
+    path: /etc/bash_completion.d/kubectl
+    block: "{{ kubectl_completion_bash.stdout }}"
+    create: yes

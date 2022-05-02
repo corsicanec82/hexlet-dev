@@ -19,6 +19,7 @@
     - role: fzf
     - role: tmux
     - role: terraform
+    - role: kubectl
 
     - role: docker-compose
       version: v2.4.1
