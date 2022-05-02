@@ -7,6 +7,7 @@
 
 - apt_key:
     url: https://apt.releases.hashicorp.com/gpg
+    keyring: /etc/apt/trusted.gpg.d/apt-releases-hashicorp-com.gpg
 
 - shell: lsb_release -cs
   register: lsb_release
