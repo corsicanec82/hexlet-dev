@@ -43,3 +43,19 @@
           versions:
             - 3.1.2
           global: 3.1.2
+
+    - role: hexlet
+      config:
+        dev_host: "{{ dev_host }}"
+        git_user: "{{ git_config_name }}"
+        git_email: "{{ git_config_email }}"
+        docker_hub_username: "{{ docker_hub_username }}"
+        docker_hub_password: "{{ docker_hub_password }}"
+        cloudflare_email: "{{ cloudflare_email }}"
+        cloudflare_api_key: "{{ cloudflare_api_key }}"
+        stripe_api_key: "{{ stripe_api_key }}"
+        stripe_publishable_key: "{{ stripe_publishable_key }}"
+
+  tasks:
+    # TODO: use https://docs.ansible.com/ansible/latest/collections/community/general/gem_module.html
+    - shell: bash -ic 'gem install solargraph'

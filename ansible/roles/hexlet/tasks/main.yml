@@ -1,0 +1,65 @@
+- git:
+    repo: git@github.com:Hexlet/hexlet.git
+    dest: ~/hexlet
+    accept_hostkey: yes
+    update: no
+
+- copy:
+    src: ~/hexlet/.env.example
+    dest: ~/hexlet/.env
+    remote_src: yes
+    force: no
+
+- lineinfile:
+    path: ~/hexlet/.env
+    regexp: '^HEXLET_HOST='
+    line: "HEXLET_HOST={{ config.dev_host }}"
+
+- lineinfile:
+    path: ~/hexlet/.env
+    regexp: '^GIT_USER='
+    line: "GIT_USER=\"{{ config.git_user }}\""
+
+- lineinfile:
+    path: ~/hexlet/.env
+    regexp: '^GIT_EMAIL='
+    line: "GIT_EMAIL={{ config.git_email }}"
+
+- lineinfile:
+    path: ~/hexlet/.env
+    regexp: '^DOCKER_HUB_USERNAME='
+    line: "DOCKER_HUB_USERNAME={{ config.docker_hub_username }}"
+
+- lineinfile:
+    path: ~/hexlet/.env
+    regexp: '^DOCKER_HUB_PASSWORD='
+    line: "DOCKER_HUB_PASSWORD={{ config.docker_hub_password }}"
+
+- lineinfile:
+    path: ~/hexlet/.env
+    regexp: '^CLOUDFLARE_EMAIL='
+    line: "CLOUDFLARE_EMAIL={{ config.cloudflare_email }}"
+
+- lineinfile:
+    path: ~/hexlet/.env
+    regexp: '^CLOUDFLARE_API_KEY='
+    line: "CLOUDFLARE_API_KEY={{ config.cloudflare_api_key }}"
+
+- lineinfile:
+    path: ~/hexlet/.env
+    regexp: '^STRIPE_API_KEY='
+    line: "STRIPE_API_KEY={{ config.stripe_api_key }}"
+
+- lineinfile:
+    path: ~/hexlet/.env
+    regexp: '^STRIPE_PUBLISHABLE_KEY='
+    line: "STRIPE_PUBLISHABLE_KEY={{ config.stripe_publishable_key }}"
+
+- shell: bash -ic 'make project-setup'
+  args:
+    chdir: ~/hexlet
+    creates: node_modules
+
+- shell: bash -ic 'make compose'
+  args:
+    chdir: ~/hexlet
