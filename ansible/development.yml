@@ -12,12 +12,13 @@
         update_cache: yes
 
   roles:
+    - role: secrets
     - role: bashrc
     - role: ps1
     - role: git
     - role: fzf
     - role: tmux
-    - role: secrets
+    - role: terraform
 
     - role: docker-compose
       version: v2.4.1

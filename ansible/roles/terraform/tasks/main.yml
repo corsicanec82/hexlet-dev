@@ -1,0 +1,20 @@
+- apt:
+    pkg:
+      - gnupg
+      - software-properties-common
+      - curl
+    update_cache: yes
+
+- apt_key:
+    url: https://apt.releases.hashicorp.com/gpg
+
+- shell: lsb_release -cs
+  register: lsb_release
+
+- apt_repository:
+    repo: "deb [arch=amd64] https://apt.releases.hashicorp.com {{ lsb_release.stdout }} main"
+
+- apt:
+    pkg:
+      - terraform
+    update_cache: yes
