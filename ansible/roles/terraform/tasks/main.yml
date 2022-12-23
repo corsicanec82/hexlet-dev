@@ -1,3 +1,9 @@
+- apt:
+    pkg:
+      - software-properties-common
+      - gnupg
+    update_cache: yes
+
 - apt_key:
     url: https://apt.releases.hashicorp.com/gpg
     keyring: /etc/apt/trusted.gpg.d/apt-releases-hashicorp-com.gpg
@@ -6,10 +12,11 @@
   register: lsb_release
 
 - apt_repository:
-    repo: "deb [arch=amd64] https://apt.releases.hashicorp.com {{ lsb_release.stdout }} main"
+    repo: "deb [signed-by=/etc/apt/trusted.gpg.d/apt-releases-hashicorp-com.gpg] https://apt.releases.hashicorp.com {{ lsb_release.stdout }} main"
 
 - apt:
     pkg:
-      - software-properties-common
       - terraform
     update_cache: yes
+
+- shell: bash -ic 'terraform -install-autocomplete'

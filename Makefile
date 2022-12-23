@@ -32,3 +32,11 @@ bash:
 		--env-file .env \
 		$(IMAGE_NAME) \
 		/bin/bash
+
+vault-edit:
+	docker run --rm -it \
+	  -v $(CURDIR):/app \
+		-v $(HOME)/.ssh/$(SSH_KEY):/root/.ssh/$(SSH_KEY) \
+		--env-file .env \
+	  $(IMAGE_NAME) \
+	  ansible-vault edit --vault-password-file tmp/vault_password ansible/development/group_vars/all/vault_vars.yml

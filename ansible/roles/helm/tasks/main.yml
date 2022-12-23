@@ -1,13 +1,17 @@
+- apt:
+    pkg:
+      - apt-transport-https
+    update_cache: yes
+
 - apt_key:
     url: https://baltocdn.com/helm/signing.asc
     keyring: /etc/apt/trusted.gpg.d/helm-stable-debian.gpg
 
 - apt_repository:
-    repo: deb https://baltocdn.com/helm/stable/debian/ all main
+    repo: "deb [signed-by=/etc/apt/trusted.gpg.d/helm-stable-debian.gpg] https://baltocdn.com/helm/stable/debian/ all main"
 
 - apt:
     pkg:
-      - apt-transport-https
       - helm
     update_cache: yes
 

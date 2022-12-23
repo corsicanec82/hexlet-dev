@@ -7,7 +7,7 @@
     block: |
       # include source files from ~/.bashrc.d directory
       if [ -d ~/.bashrc.d ]; then
-        for file in ~/.bashrc.d/*; do
-          . "$file"
-        done
+          for file in ~/.bashrc.d/*; do
+              . "$file"
+          done
       fi

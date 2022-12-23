@@ -22,4 +22,5 @@
     path: ~/.bashrc.d/tmux.bashrc
     block: |
       alias dev='tmux attach -t dev || tmux new -s dev'
+      alias fixssh='eval $(tmux showenv -s SSH_AUTH_SOCK)'
     create: yes
