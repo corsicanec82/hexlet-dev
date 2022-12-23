@@ -70,6 +70,3 @@
 
     # TODO: use https://docs.ansible.com/ansible/latest/collections/community/general/gem_module.html
     - shell: bash -ic 'gem install solargraph'
-
-    - debug:
-        msg: Finished
