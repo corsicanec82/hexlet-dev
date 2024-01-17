@@ -1,0 +1,20 @@
+remote_host:
+  name: "{{ vault_remote_host.name }}"
+  ip: "{{ vault_remote_host.ip }}"
+  user: "{{ vault_remote_host.user }}"
+
+git_config:
+  name: "{{ vault_git_config.name }}"
+  email: "{{ vault_git_config.email }}"
+
+docker_hub:
+  username: "{{ vault_docker_hub.username }}"
+  password: "{{ vault_docker_hub.password }}"
+
+cloudflare:
+  email: "{{ vault_cloudflare.email }}"
+  api_key: "{{ vault_cloudflare.api_key }}"
+
+stripe:
+  api_key: "{{ vault_stripe.api_key }}"
+  publishable_key: "{{ vault_stripe.publishable_key }}"

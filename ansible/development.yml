@@ -1,72 +1,86 @@
-- name: Setup dev-machine
-  hosts: all
-  gather_facts: yes
+- hosts: workstations
+  gather_facts: no
+  any_errors_fatal: true
+  tasks:
+    - name: update and upgrade system
+      apt:
+        upgrade: safe
+        update_cache: yes
 
-  pre_tasks:
-    - name: Update apt packages
+    - name: install packages
       apt:
         pkg:
           - curl
           - gnupg
-        update_cache: yes
-
-  roles:
-    # NOTE: no needed, use ssh agent
-    # - role: secrets
-    - role: bashrc
-    - role: ps1
-
-    - role: git
-      config:
-        name: "{{ git_config_name }}"
-        email: "{{ git_config_email }}"
-
-    - role: fzf
-    - role: tmux
-    - role: terraform
-    - role: kubectl
-    - role: helm
-    - role: google-cloud-sdk
-    - role: direnv
-    - role: yandex-cli
-
-    - role: docker-compose
-      version: v2.14.2
-
-    - role: asdf
-      version: v0.10.2
-      plugins:
-        - name: nodejs
-          versions:
-            - 18.9.0
-            - 18.12.1
-            - 19.3.0
-          global: 18.12.1
-        - name: ruby
-          versions:
-            - 3.1.3
-          global: 3.1.3
-
-    # TODO: need to update
-    # - role: hexlet
-    #   config:
-    #     dev_host: "{{ dev_host }}"
-    #     git_user: "{{ git_config_name }}"
-    #     git_email: "{{ git_config_email }}"
-    #     docker_hub_username: "{{ docker_hub_username }}"
-    #     docker_hub_password: "{{ docker_hub_password }}"
-    #     cloudflare_email: "{{ cloudflare_email }}"
-    #     cloudflare_api_key: "{{ cloudflare_api_key }}"
-    #     stripe_api_key: "{{ stripe_api_key }}"
-    #     stripe_publishable_key: "{{ stripe_publishable_key }}"
-
-  tasks:
-    - apt:
-        pkg:
+          - zsh
+          - fzf
+          - direnv
           - mc
           - htop
           - make
         update_cache: yes
 
-    # TODO: use https://docs.ansible.com/ansible/latest/collections/community/general/gem_module.html
-    - shell: bash -ic 'gem install solargraph'
+    - name: change shell for user
+      user:
+        name: "{{ remote_host.user }}"
+        shell: "/usr/bin/zsh"
+
+- hosts: workstations
+  gather_facts: no
+  any_errors_fatal: true
+  roles:
+    - role: git
+      config:
+        name: "{{ git_config.name }}"
+        email: "{{ git_config.email }}"
+
+    - role: asdf
+      version: v0.13.1
+      plugins:
+        - name: nodejs
+          versions:
+            - 14.21.3
+            - 20.11.0
+          global: 20.11.0
+        - name: ruby
+          versions:
+            - 3.2.2
+          global: 3.2.2
+
+    - role: tmux
+
+    - role: ohmyzsh
+      update: yes
+      config:
+        theme: agnoster
+        plugins:
+          - git
+          - fzf
+          - direnv
+          - asdf
+
+#   roles:
+#     - role: terraform
+#     - role: kubectl
+#     - role: helm
+#     - role: google-cloud-sdk
+#     - role: yandex-cli
+
+#     - role: docker-compose
+#       version: v2.14.2
+
+#     # TODO: need to update
+#     # - role: hexlet
+#     #   config:
+#     #     dev_host: "{{ dev_host }}"
+#     #     git_user: "{{ git_config_name }}"
+#     #     git_email: "{{ git_config_email }}"
+#     #     docker_hub_username: "{{ docker_hub_username }}"
+#     #     docker_hub_password: "{{ docker_hub_password }}"
+#     #     cloudflare_email: "{{ cloudflare_email }}"
+#     #     cloudflare_api_key: "{{ cloudflare_api_key }}"
+#     #     stripe_api_key: "{{ stripe_api_key }}"
+#     #     stripe_publishable_key: "{{ stripe_publishable_key }}"
+
+#     # TODO: use https://docs.ansible.com/ansible/latest/collections/community/general/gem_module.html
+#     - shell: bash -ic 'gem install solargraph'

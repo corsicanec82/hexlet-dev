@@ -1,0 +1,2 @@
+[workstations]
+workstation ansible_host="{{ remote_host.ip }}"

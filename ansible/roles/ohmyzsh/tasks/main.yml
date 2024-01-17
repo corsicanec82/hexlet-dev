@@ -1,0 +1,47 @@
+- stat:
+    path: "$HOME/.oh-my-zsh"
+  register: ohmyzsh_directory
+
+- block:
+    - get_url:
+        url: "https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh"
+        dest: "/tmp/install.sh"
+        mode: "+x"
+
+    - shell: "bash -ic 'RUNZSH=no /tmp/install.sh'"
+      register: ps
+  when: not ohmyzsh_directory.stat.exists
+
+- block:
+    - shell: "zsh -ic 'omz update'"
+      when: update is true
+
+    - blockinfile:
+        path: "{{ config_file_path }}"
+        block: |
+          if [ -f ~/.zsh_aliases ]; then
+            . ~/.zsh_aliases
+          fi
+
+          # include source files from ~/.zshrc.d directory
+          if [ -d ~/.zshrc.d ] && [ "$(ls -A ~/.zshrc.d)" ]; then
+            for file in ~/.zshrc.d/*; do
+              . "$file"
+            done
+          fi
+
+    - lineinfile:
+        path: "{{ config_file_path }}"
+        regexp: '^ZSH_THEME='
+        line: "ZSH_THEME={{ config.theme }}"
+      when: config.theme is defined
+
+    - replace:
+        path: "{{ config_file_path }}"
+        regexp: '^plugins=\([\S|\s]+\)\s{1}$'
+        replace: |
+          plugins=(
+            {{ config.plugins | join('\n  ') }}
+          )
+      when: config.plugins is defined
+  when: ohmyzsh_directory.stat.exists

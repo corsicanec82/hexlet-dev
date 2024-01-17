@@ -1,10 +1,15 @@
-FROM quay.io/ansible/ansible-runner:stable-2.12-latest
+FROM quay.io/ansible/ansible-runner:latest
 
-ENV ANSIBLE_HOST_KEY_CHECKING=False
-ENV ANSIBLE_FORCE_COLOR=1
+RUN ln -s /usr/bin/python3 /usr/bin/python
 
-WORKDIR /app
+RUN python -m pip install --upgrade pip
+RUN pip install docker
+RUN yum update -y && yum -yyq install cronie unzip vim
 
-COPY requirements.yml .
+COPY requirements.yml /tmp/requirements.yml
 
-RUN ansible-galaxy install -f -r requirements.yml
+RUN ansible-galaxy install -f -r /tmp/requirements.yml
+
+# NOTE: ansible-runner entrypoint replace /etc/passwd & /etc/group
+# creating users and groups has no effect
+# ENV CURRENT_UID=1

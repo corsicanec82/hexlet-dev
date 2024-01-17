@@ -7,6 +7,8 @@
   args:
     creates: "{{ asdf_dir }}/plugins/{{ data.name }}"
 
+- shell: "bash -ic 'asdf plugin update {{ data.name }}'"
+
 - shell: "bash -ic 'asdf install {{ data.name }} {{ item_version }}'"
   args:
     creates: "{{ asdf_dir }}/installs/{{ data.name }}/{{ item_version }}"

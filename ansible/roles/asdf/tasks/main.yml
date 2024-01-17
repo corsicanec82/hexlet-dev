@@ -8,12 +8,12 @@
     dest: "{{ asdf_dir }}"
     version: "{{ version }}"
 
-- blockinfile:
-    path: ~/.bashrc.d/asdf.bashrc
-    block: |
-      . $HOME/.asdf/asdf.sh
-      . $HOME/.asdf/completions/asdf.bash
-    create: yes
+# - blockinfile:
+#     path: ~/.bashrc.d/asdf.bashrc
+#     block: |
+#       . $HOME/.asdf/asdf.sh
+#       . $HOME/.asdf/completions/asdf.bash
+#     create: yes
 
 - include_tasks: "plugin.yml"
   vars:

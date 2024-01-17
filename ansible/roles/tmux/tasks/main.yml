@@ -17,10 +17,12 @@
     src: ~/.tmux/.tmux.conf.local
     dest: ~/
     remote_src: yes
+    force: false
 
 - blockinfile:
-    path: ~/.bashrc.d/tmux.bashrc
+    path: ~/.zshrc.d/tmux.zshrc
     block: |
       alias dev='tmux attach -t dev || tmux new -s dev'
       alias fixssh='eval $(tmux showenv -s SSH_AUTH_SOCK)'
+      alias fixsshsock='export SSH_AUTH_SOCK=$(ls -t /tmp/ssh-**/* | head -1)'
     create: yes
