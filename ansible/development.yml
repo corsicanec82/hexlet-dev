@@ -58,10 +58,10 @@
           - fzf
           - direnv
           - asdf
+          - kubectl
+          - terraform
 
 #   roles:
-#     - role: terraform
-#     - role: kubectl
 #     - role: helm
 #     - role: google-cloud-sdk
 #     - role: yandex-cli
